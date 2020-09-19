@@ -3,6 +3,7 @@ package com.thoughtworks.lockerrobot.robot;
 import com.thoughtworks.lockerrobot.Bag;
 import com.thoughtworks.lockerrobot.Locker;
 import com.thoughtworks.lockerrobot.Ticket;
+import com.thoughtworks.lockerrobot.exception.FullCapacityException;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -66,5 +67,17 @@ public class SuperLockerRobotTest {
 
         assertNotNull(ticket);
         assertEquals(bag, firstLocker.take(ticket));
+    }
+
+    @Test(expected = FullCapacityException.class)
+    public void should_throw_full_capacity_exception_when_super_locker_robot_save_bag_given_two_lockers_with_0_free_capacity_and_bag() {
+        Locker firstLocker = new Locker(1);
+        Locker secondLocker = new Locker(1);
+        firstLocker.save(new Bag());
+        secondLocker.save(new Bag());
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Arrays.asList(firstLocker, secondLocker));
+        Bag bag = new Bag();
+
+        superLockerRobot.save(bag);
     }
 }
