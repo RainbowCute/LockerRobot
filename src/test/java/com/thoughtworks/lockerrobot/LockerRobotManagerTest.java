@@ -136,7 +136,7 @@ public class LockerRobotManagerTest {
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Collections.singletonList(new Locker(10, Type.M)));
         Locker locker = new Locker(10, Type.S);
         LockerRobotManager lockerRobotManager = new LockerRobotManager(Collections.singletonList(locker), Collections.singletonList(primaryLockerRobot));
-        Bag bag = new Bag(Type.S);
+        Bag bag = new Bag(Type.M);
         lockerRobotManager.save(bag);
         Ticket invalidTicket = new Ticket();
 

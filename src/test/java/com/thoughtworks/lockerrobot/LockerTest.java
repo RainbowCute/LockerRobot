@@ -78,4 +78,11 @@ public class LockerTest {
 
         locker2.take(ticket1);
     }
+
+    @Test(expected = TypeNotMatchException.class)
+    public void should_throw_Type_not_match_exception_when_locker_save_bag_given_not_match_bag() {
+        Locker locker = new Locker(10, Type.S);
+
+        locker.save(new Bag(Type.M));
+    }
 }

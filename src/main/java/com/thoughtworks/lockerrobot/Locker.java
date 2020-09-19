@@ -19,6 +19,10 @@ public class Locker implements Storable {
     }
 
     public Ticket save(Bag bag) {
+        if (bag.getType() != null && type != bag.getType()) {
+            throw new TypeNotMatchException();
+        }
+
         if (isFull()) {
             throw new FullCapacityException();
         }
@@ -29,7 +33,7 @@ public class Locker implements Storable {
     }
 
     public Bag take(Ticket ticket) {
-        if(ticket.getType() != null && type != ticket.getType()) {
+        if (ticket.getType() != null && type != ticket.getType()) {
             throw new TypeNotMatchException();
         }
         if (!isExist(ticket)) {
