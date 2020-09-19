@@ -44,62 +44,67 @@ then：返回票据，包存在PrimaryLockerRobot中
 when：小樱存包
 then：返回票据，包存在SuperLockerRobot中
 
-4.given：LockerRobotManager管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，每个都有空位，VIP客户，待存的S号的包
-when：LockerRobotManager存包
-then：返回票据，包存在S号的locker中
-
-5.given：LockerRobotManager管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，每个都有空位，VIP客户，待存的M号的包
-when：LockerRobotManager存包
-then：返回票据，包存在PrimaryLockerRobot中
-
-6.given：LockerRobotManager管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，每个都有空位，VIP客户，待存的L号的包
-when：LockerRobotManager存包
-then：返回票据，包存在SuperLockerRobot中
-
-7.given：小樱管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，S号locker没有空位，普通客户，待存的S号的包
+4.given：小樱管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，S号locker没有空位，普通客户，待存的S号的包
 when：小樱存包
 then：提示储物柜已满
 
-8.given：小樱管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，M号的PrimaryLockerRobot没有空位，普通客户，待存的M号的包
+5.given：小樱管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，M号的PrimaryLockerRobot没有空位，普通客户，待存的M号的包
 when：小樱存包
 then：提示储物柜已满
 
-9.given：小樱管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，L号的SuperLockerRobot没有空位，普通客户，待存的L号的包
+6.given：小樱管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，L号的SuperLockerRobot没有空位，普通客户，待存的L号的包
 when：小樱存包
 then：提示储物柜已满
 
-10.given：LockerRobotManager管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，S号locker没有空位，VIP客户，待存的S号的包
-when：LockerRobotManager存包
-then：提示储物柜已满
-
-11.given：LockerRobotManager管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，M号的PrimaryLockerRobot没有空位，VIP客户，待存的M号的包
-when：LockerRobotManager存包
-then：提示储物柜已满
-
-12.given：LockerRobotManager管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，L号的SuperLockerRobot没有空位，VIP客户，待存的L号的包
-when：LockerRobotManager存包
-then：提示储物柜已满
-
-13.given：小樱管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，普通客户，有效票据
+7.given：小樱管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，普通客户，有效票据
 when：小樱取包
 then：返回对应的包
 
-14.given：LockerRobotManager管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，VIP客户，有效票据
-when：LockerRobotManager取包
-then：返回对应的包
-
-15.given：小樱管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，普通客户，无效票据
+8.given：小樱管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，普通客户，无效票据
 when：小樱取包
 then：提示票无效
 
-16.given：LockerRobotManager管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，VIP客户，无效票据
-when：LockerRobotManager取包
-then：提示票无效
 
-17.given：3个不同型号locker产生的有效票据
+-- locker 
+1.given：3个不同型号locker产生的有效票据
 when：locker取包
 then：提示票的型号不对
 
-18.given：1个robot，管理的locker和自己的型号不匹配
+-- primary locker robot
+1.given：1个robot，管理的locker和自己的型号不匹配
 when：robot存包
 then：提示型号不对
+
+
+--- LockerRobotManager
+1.given：LockerRobotManager管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，每个都有空位，VIP客户，待存的S号的包
+when：LockerRobotManager存包
+then：返回票据，包存在S号的locker中
+
+2.given：LockerRobotManager管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，每个都有空位，VIP客户，待存的M号的包
+when：LockerRobotManager存包
+then：返回票据，包存在PrimaryLockerRobot中
+
+3.given：LockerRobotManager管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，每个都有空位，VIP客户，待存的L号的包
+when：LockerRobotManager存包
+then：返回票据，包存在SuperLockerRobot中
+
+4.given：LockerRobotManager管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，S号locker没有空位，VIP客户，待存的S号的包
+when：LockerRobotManager存包
+then：提示储物柜已满
+
+5.given：LockerRobotManager管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，M号的PrimaryLockerRobot没有空位，VIP客户，待存的M号的包
+when：LockerRobotManager存包
+then：提示储物柜已满
+
+6.given：LockerRobotManager管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，L号的SuperLockerRobot没有空位，VIP客户，待存的L号的包
+when：LockerRobotManager存包
+then：提示储物柜已满
+
+7.given：LockerRobotManager管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，VIP客户，有效票据
+when：LockerRobotManager取包
+then：返回对应的包
+
+8.given：LockerRobotManager管理1个S号locker，一个M号的PrimaryLockerRobot，一个L号的SuperLockerRobot，VIP客户，无效票据
+when：LockerRobotManager取包
+then：提示票无效
