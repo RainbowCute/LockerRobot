@@ -27,7 +27,7 @@ public class Locker implements Storable {
             throw new FullCapacityException();
         }
 
-        Ticket ticket = new Ticket();
+        Ticket ticket = new Ticket(bag.getType());
         ticketBagMap.put(ticket, bag);
         return ticket;
     }

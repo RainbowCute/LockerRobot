@@ -19,4 +19,13 @@ public class Waiter {
                 .map(storable -> storable.save(bag))
                 .orElseThrow(FullCapacityException::new);
     }
+
+    public Bag take(Ticket ticket) {
+        return storables.stream()
+                .filter(storable -> storable.getType() == ticket.getType())
+                .filter(storable -> storable.isExist(ticket))
+                .findFirst()
+                .map(storable -> storable.take(ticket))
+                .orElse(null);
+    }
 }

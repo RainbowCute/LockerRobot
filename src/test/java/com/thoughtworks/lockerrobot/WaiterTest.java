@@ -91,4 +91,19 @@ public class WaiterTest {
 
         waiter.save(bag);
     }
+
+    @Test
+    public void should_return_correct_bag_when_waiter_take_bag_given_3_types_of_storables_and_valid_ticket_and_common_customer() {
+        Locker locker = new Locker(10, Type.S);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Collections.singletonList(new Locker(10, Type.M)));
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Collections.singletonList(new Locker(10, Type.L)));
+        Waiter waiter = new Waiter(Arrays.asList(locker, primaryLockerRobot, superLockerRobot));
+        Bag bag = new Bag(Type.L);
+        Ticket ticket = waiter.save(bag);
+
+        Bag takenBag = waiter.take(ticket);
+
+        assertNotNull(takenBag);
+        assertEquals(bag, takenBag);
+    }
 }
