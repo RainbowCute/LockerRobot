@@ -51,4 +51,20 @@ public class SuperLockerRobotTest {
         assertNotNull(ticket);
         assertEquals(bag, secondLocker.take(ticket));
     }
+
+    @Test
+    public void should_return_ticket_and_bag_in_1st_locker_when_super_locker_robot_save_bag_given_two_lockers_with_same_free_capacity_rate_and_bag() {
+        Locker firstLocker = new Locker(5);
+        Locker secondLocker = new Locker(10);
+        firstLocker.save(new Bag());
+        secondLocker.save(new Bag());
+        secondLocker.save(new Bag());
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Arrays.asList(firstLocker, secondLocker));
+        Bag bag = new Bag();
+
+        Ticket ticket = superLockerRobot.save(bag);
+
+        assertNotNull(ticket);
+        assertEquals(bag, firstLocker.take(ticket));
+    }
 }
