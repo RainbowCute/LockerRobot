@@ -2,6 +2,7 @@ package com.thoughtworks.lockerrobot;
 
 import com.thoughtworks.lockerrobot.enums.Type;
 import com.thoughtworks.lockerrobot.exception.FullCapacityException;
+import com.thoughtworks.lockerrobot.exception.TicketInvalidException;
 import com.thoughtworks.lockerrobot.robot.PrimaryLockerRobot;
 import com.thoughtworks.lockerrobot.robot.SuperLockerRobot;
 import org.junit.Test;
@@ -106,5 +107,17 @@ public class LockerRobotManagerTest {
 
         assertNotNull(takenBag);
         assertEquals(bag, takenBag);
+    }
+
+    @Test(expected = TicketInvalidException.class)
+    public void should_throw_ticket_invalid_exception_when_locker_robot_manager_take_bag_given_3_types_of_storables_and_invalid_ticket_and_VIP_customer() {
+        Locker locker = new Locker(10, Type.S);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Collections.singletonList(new Locker(10, Type.M)));
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Collections.singletonList(new Locker(10, Type.L)));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(Arrays.asList(locker, primaryLockerRobot, superLockerRobot));
+        Bag bag = new Bag(Type.L);
+        lockerRobotManager.save(bag);
+
+        lockerRobotManager.take(new Ticket());
     }
 }
