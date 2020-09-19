@@ -92,4 +92,19 @@ public class LockerRobotManagerTest {
 
         lockerRobotManager.save(bag);
     }
+
+    @Test
+    public void should_return_correct_bag_when_locker_robot_manager_take_bag_given_3_types_of_storables_and_valid_ticket_and_VIP_customer() {
+        Locker locker = new Locker(10, Type.S);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Collections.singletonList(new Locker(10, Type.M)));
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Collections.singletonList(new Locker(10, Type.L)));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(Arrays.asList(locker, primaryLockerRobot, superLockerRobot));
+        Bag bag = new Bag(Type.L);
+        Ticket ticket = lockerRobotManager.save(bag);
+
+        Bag takenBag = lockerRobotManager.take(ticket);
+
+        assertNotNull(takenBag);
+        assertEquals(bag, takenBag);
+    }
 }
