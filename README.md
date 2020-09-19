@@ -99,3 +99,7 @@ then：提示票无效
 17.given：3个不同型号locker产生的有效票据
 when：locker取包
 then：提示票的型号不对
+
+18.given：1个robot，管理的locker和自己的型号不匹配
+when：robot存包
+then：提示型号不对

@@ -2,23 +2,16 @@ package com.thoughtworks.lockerrobot;
 
 import com.thoughtworks.lockerrobot.exception.FullCapacityException;
 import com.thoughtworks.lockerrobot.exception.TicketInvalidException;
-import com.thoughtworks.lockerrobot.robot.BaseLockerRobot;
 import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 public class LockerRobotManager {
-    private List<Storable> storables = new ArrayList<>();
+    private final List<Storable> storables;
 
-    public LockerRobotManager(List<Locker> lockers, List<BaseLockerRobot> robots) {
-        if (robots != null) {
-            storables.addAll(robots);
-        }
-        if (lockers != null) {
-            storables.addAll(lockers);
-        }
+    public LockerRobotManager(List<Storable> storables) {
+        this.storables = storables;
     }
 
     public Ticket save(Bag bag) {
