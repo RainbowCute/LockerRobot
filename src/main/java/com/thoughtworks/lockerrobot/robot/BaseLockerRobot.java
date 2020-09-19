@@ -6,6 +6,7 @@ import com.thoughtworks.lockerrobot.Storable;
 import com.thoughtworks.lockerrobot.Ticket;
 import com.thoughtworks.lockerrobot.exception.FullCapacityException;
 import com.thoughtworks.lockerrobot.exception.TicketInvalidException;
+import com.thoughtworks.lockerrobot.exception.TypeNotMatchException;
 import lombok.Getter;
 
 import java.util.List;
@@ -30,6 +31,9 @@ public abstract class BaseLockerRobot implements Storable {
     public abstract Optional<Locker> getAvailableLocker();
 
     public Ticket save(Bag bag) {
+        if (bag.getType() != null && bag.getType() != getType()) {
+            throw new TypeNotMatchException();
+        }
         Optional<Locker> optionalLocker = getAvailableLocker();
         return optionalLocker.map(locker -> locker.save(bag)).orElseThrow(FullCapacityException::new);
     }

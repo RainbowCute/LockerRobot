@@ -6,6 +6,7 @@ import com.thoughtworks.lockerrobot.Ticket;
 import com.thoughtworks.lockerrobot.enums.Type;
 import com.thoughtworks.lockerrobot.exception.FullCapacityException;
 import com.thoughtworks.lockerrobot.exception.TicketInvalidException;
+import com.thoughtworks.lockerrobot.exception.TypeNotMatchException;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -95,5 +96,23 @@ public class PrimaryLockerRobotTest {
         Ticket ticket = new Ticket();
 
         primaryLockerRobot.take(ticket);
+    }
+
+    @Test(expected = TypeNotMatchException.class)
+    public void should_throw_type_not_match_exception_when_robot_save_bag_given_robot_manage_L_type_locker() {
+        Locker locker = new Locker(10, Type.L);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Collections.singletonList(locker));
+        Bag bag = new Bag(Type.M);
+
+        primaryLockerRobot.save(bag);
+    }
+
+    @Test(expected = TypeNotMatchException.class)
+    public void should_throw_type_not_match_exception_when_robot_save_bag_given_robot_manage_L_type_locker_and_L_type_bag() {
+        Locker locker = new Locker(10, Type.L);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Collections.singletonList(locker));
+        Bag bag = new Bag(Type.L);
+
+        primaryLockerRobot.save(bag);
     }
 }
