@@ -1,6 +1,7 @@
 package com.thoughtworks.lockerrobot.robot;
 
 import com.thoughtworks.lockerrobot.Locker;
+import com.thoughtworks.lockerrobot.enums.Type;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,5 +14,10 @@ public class PrimaryLockerRobot extends BaseLockerRobot {
     @Override
     public Optional<Locker> getAvailableLocker() {
         return lockers.stream().filter(locker -> !locker.isFull()).findFirst();
+    }
+
+    @Override
+    public Type getType() {
+        return Type.M;
     }
 }

@@ -2,6 +2,7 @@ package com.thoughtworks.lockerrobot.robot;
 
 
 import com.thoughtworks.lockerrobot.Locker;
+import com.thoughtworks.lockerrobot.enums.Type;
 
 import java.util.Comparator;
 import java.util.List;
@@ -17,5 +18,10 @@ public class SmartLockerRobot extends BaseLockerRobot {
         return lockers.stream()
                 .filter(locker -> !locker.isFull())
                 .max(Comparator.comparing(Locker::getFreeCapacity));
+    }
+
+    @Override
+    public Type getType() {
+        return Type.ALL;
     }
 }

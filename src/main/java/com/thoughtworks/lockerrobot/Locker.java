@@ -1,5 +1,6 @@
 package com.thoughtworks.lockerrobot;
 
+import com.thoughtworks.lockerrobot.enums.Type;
 import com.thoughtworks.lockerrobot.exception.FullCapacityException;
 import com.thoughtworks.lockerrobot.exception.TicketInvalidException;
 
@@ -8,10 +9,17 @@ import java.util.Map;
 
 public class Locker implements Storable {
     private final int capacity;
+    private final Type type;
     private final Map<Ticket, Bag> ticketBagMap = new HashMap<>();
 
     public Locker(int capacity) {
         this.capacity = capacity;
+        this.type = Type.S;
+    }
+
+    public Locker(int capacity, Type type) {
+        this.capacity = capacity;
+        this.type = type;
     }
 
     public Ticket save(Bag bag) {
@@ -42,6 +50,11 @@ public class Locker implements Storable {
     @Override
     public boolean isExist(Ticket ticket) {
         return ticketBagMap.containsKey(ticket);
+    }
+
+    @Override
+    public Type getType() {
+        return type;
     }
 
     public int getFreeCapacity() {
