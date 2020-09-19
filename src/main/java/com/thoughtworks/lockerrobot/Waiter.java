@@ -1,6 +1,7 @@
 package com.thoughtworks.lockerrobot;
 
 import com.thoughtworks.lockerrobot.exception.FullCapacityException;
+import com.thoughtworks.lockerrobot.exception.TicketInvalidException;
 
 import java.util.List;
 
@@ -26,6 +27,6 @@ public class Waiter {
                 .filter(storable -> storable.isExist(ticket))
                 .findFirst()
                 .map(storable -> storable.take(ticket))
-                .orElse(null);
+                .orElseThrow(TicketInvalidException::new);
     }
 }
