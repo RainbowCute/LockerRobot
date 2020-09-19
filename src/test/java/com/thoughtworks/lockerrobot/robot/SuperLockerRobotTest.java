@@ -80,4 +80,16 @@ public class SuperLockerRobotTest {
 
         superLockerRobot.save(bag);
     }
+
+    @Test
+    public void should_take_bag_successfully_when_super_locker_robot_take_bag_given_1_locker_and_valid_ticket() {
+        Locker locker = new Locker(10);
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Collections.singletonList(locker));
+        Bag bag = new Bag();
+        Ticket ticket = superLockerRobot.save(bag);
+
+        Bag takenBag = superLockerRobot.take(ticket);
+
+        assertEquals(bag, takenBag);
+    }
 }
