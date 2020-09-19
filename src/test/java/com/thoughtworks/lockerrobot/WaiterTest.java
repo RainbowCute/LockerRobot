@@ -67,4 +67,16 @@ public class WaiterTest {
 
         waiter.save(bag);
     }
+
+    @Test(expected = FullCapacityException.class)
+    public void should_throw_full_capacity_exception_when_waiter_save_bag_given_3_types_of_locker_and_and_M_type_locker_has_no_free_capacity_and_M_type_bag_and_common_customer() {
+        Locker locker = new Locker(10, Type.S);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Collections.singletonList(new Locker(1, Type.M)));
+        primaryLockerRobot.save(new Bag());
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Collections.singletonList(new Locker(10, Type.L)));
+        Waiter waiter = new Waiter(Arrays.asList(locker, primaryLockerRobot, superLockerRobot));
+        Bag bag = new Bag(Type.M);
+
+        waiter.save(bag);
+    }
 }
