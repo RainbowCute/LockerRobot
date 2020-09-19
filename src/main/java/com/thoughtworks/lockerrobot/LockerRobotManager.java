@@ -1,6 +1,5 @@
 package com.thoughtworks.lockerrobot;
 
-import com.thoughtworks.lockerrobot.exception.FullCapacityException;
 import com.thoughtworks.lockerrobot.exception.TicketInvalidException;
 import lombok.Getter;
 
@@ -16,10 +15,11 @@ public class LockerRobotManager {
 
     public Ticket save(Bag bag) {
         return storables.stream()
+                .filter(storable -> storable.getType() == bag.getType())
                 .filter(storable -> !storable.isFull())
                 .findFirst()
-                .map(locker -> locker.save(bag))
-                .orElseThrow(FullCapacityException::new);
+                .map(storable -> storable.save(bag))
+                .orElse(null);
     }
 
     public Bag take(Ticket ticket) {
