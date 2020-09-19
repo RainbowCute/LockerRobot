@@ -1,5 +1,7 @@
 package com.thoughtworks.lockerrobot;
 
+import com.thoughtworks.lockerrobot.exception.FullCapacityException;
+
 import java.util.List;
 
 public class Waiter {
@@ -12,8 +14,9 @@ public class Waiter {
     public Ticket save(Bag bag) {
         return storables.stream()
                 .filter(storable -> storable.getType() == bag.getType())
+                .filter(storable -> !storable.isFull())
                 .findFirst()
                 .map(storable -> storable.save(bag))
-                .orElse(null);
+                .orElseThrow(FullCapacityException::new);
     }
 }

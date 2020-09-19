@@ -1,6 +1,7 @@
 package com.thoughtworks.lockerrobot;
 
 import com.thoughtworks.lockerrobot.enums.Type;
+import com.thoughtworks.lockerrobot.exception.FullCapacityException;
 import com.thoughtworks.lockerrobot.robot.PrimaryLockerRobot;
 import com.thoughtworks.lockerrobot.robot.SuperLockerRobot;
 import org.junit.Test;
@@ -12,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class WaiterTest {
-
     @Test
     public void should_return_ticket_and_bag_in_S_type_locker_when_waiter_save_bag_given_3_types_of_locker_and_S_type_bag_and_common_customer() {
         Locker locker = new Locker(10, Type.S);
@@ -26,6 +26,7 @@ public class WaiterTest {
         assertNotNull(ticket);
         assertEquals(bag, locker.take(ticket));
     }
+
 
     @Test
     public void should_return_ticket_and_bag_in_M_type_locker_when_waiter_save_bag_given_3_types_of_locker_and_M_type_bag_and_common_customer() {
@@ -53,5 +54,17 @@ public class WaiterTest {
 
         assertNotNull(ticket);
         assertEquals(bag, superLockerRobot.take(ticket));
+    }
+
+    @Test(expected = FullCapacityException.class)
+    public void should_throw_full_capacity_exception_when_waiter_save_bag_given_3_types_of_locker_and_and_S_type_locker_has_no_free_capacity_and_S_type_bag_and_common_customer() {
+        Locker locker = new Locker(1, Type.S);
+        locker.save(new Bag());
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Collections.singletonList(new Locker(10, Type.M)));
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Collections.singletonList(new Locker(10, Type.L)));
+        Waiter waiter = new Waiter(Arrays.asList(locker, primaryLockerRobot, superLockerRobot));
+        Bag bag = new Bag(Type.S);
+
+        waiter.save(bag);
     }
 }
